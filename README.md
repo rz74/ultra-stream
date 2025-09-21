@@ -25,58 +25,61 @@ The `DataBook` system maintains real-time state for each data subject:
 ## Project Structure
 
 ```
-data_processing_engine/
+ultra-stream/
 ├── CMakeLists.txt                    # CMake build configuration for the entire project
+├── LICENSE                          # Project license
+├── README.md                        # This file - comprehensive project documentation
 ├── run_full_pipeline.sh             # Master script to build, generate test vectors, and run full performance test
-├── .vscode/
-│   └── settings.json                # VSCode project-specific settings
-├── build/                           # CMake-generated build artifacts (binaries, objects, CMake files)
-│   ├── bin/
-│   │   ├── data_processing_service # Main executable - high-performance data processing engine
-│   │   ├── tcp_receiver            # Test TCP server to capture processed data outputs
-│   │   ├── test_all                # Integration test runner and performance validator
-│   │   └── udp_packet_generator    # Test data generator for load testing
-│   └── ...                         # Intermediate object files, dependency tracking, etc.
+├── build_distribution.sh            # Script to create distribution package
+├── test_distribution.sh             # Test script for distribution package
+├── test_full_integration.sh         # Full integration test script
+├── data_processing_engine_linux.tar.gz # Pre-built distribution package
+├── DISTRIBUTION_README.md           # Distribution-specific documentation
+├── .vscode/                         # VSCode project settings (optional)
+├── build/                           # Generated during build (excluded from repository)
+│   ├── bin/                         # Compiled executables
+│   │   ├── data_processing_service  # Main executable
+│   │   ├── tcp_receiver             # Test TCP server
+│   │   ├── test_all                 # Integration test runner
+│   │   └── udp_packet_generator     # Test data generator
+│   └── ...                          # CMake build artifacts
 ├── include/
-│   ├── logger.hpp                  # High-performance logging with microsecond timestamps
 │   ├── composite_score_calculator.hpp # CompositeScoreCalculator for data aggregation algorithms
-│   ├── data_book.hpp              # DataBook classes to manage multi-level data state per subject
-│   ├── parser_utils.hpp           # Binary protocol parsing and endianness utilities
-│   ├── process_packet_core.hpp    # Core pipeline: parse message → update data → calculate → transmit
-│   ├── tcp_sender.hpp             # TcpSender class for reliable result transmission
-│   ├── types.hpp                  # Shared type definitions: DataLevel, ProcessedMessage, CompositeScoreMessage
-│   └── udp_receiver.hpp           # UdpReceiver for high-efficiency multicast data ingestion
-├── logs/
-│   ├── tcp_stderr.log             # Error logs captured from tcp_receiver during testing
-│   └── tcp_stdout.log             # Output logs captured from tcp_receiver during testing
+│   ├── data_book.hpp                # DataBook classes to manage multi-level data state per subject
+│   ├── logger.hpp                   # High-performance logging with microsecond timestamps
+│   ├── parser_utils.hpp             # Binary protocol parsing and endianness utilities
+│   ├── process_packet_core.hpp      # Core pipeline: parse message → update data → calculate → transmit
+│   ├── tcp_sender.hpp               # TcpSender class for reliable result transmission
+│   ├── types.hpp                    # Shared type definitions: DataLevel, ProcessedMessage, CompositeScoreMessage
+│   └── udp_receiver.hpp             # UdpReceiver for high-efficiency multicast data ingestion
 ├── src/
-│   ├── logger.cpp                 # Implementation of microsecond-precision logging
-│   ├── main.cpp                   # Application entry: sets up multicast ingestion, data processing, TCP output
 │   ├── composite_score_calculator.cpp # Implementation of configurable scoring algorithms
-│   ├── data_book.cpp              # Implements DataBook update logic and demand/supply state management
-│   ├── parser_utils.cpp           # Binary message parsing with network byte order handling
-│   ├── tcp_sender.cpp             # TCP socket management and message transmission
-│   └── udp_receiver.cpp           # Multicast receive loop with user-provided callback dispatch
+│   ├── data_book.cpp                # Implements DataBook update logic and demand/supply state management
+│   ├── logger.cpp                   # Implementation of microsecond-precision logging
+│   ├── main.cpp                     # Application entry: sets up multicast ingestion, data processing, TCP output
+│   ├── parser_utils.cpp             # Binary message parsing with network byte order handling
+│   ├── tcp_sender.cpp               # TCP socket management and message transmission
+│   └── udp_receiver.cpp             # Multicast receive loop with user-provided callback dispatch
 ├── test/
-│   ├── evaluate_results.py        # Python analytics engine: generates performance dashboard from timing data
-│   ├── tcp_receiver.cpp           # TCP test server to capture and validate processed outputs
-│   ├── test_all.cpp               # Comprehensive integration test with latency measurement
-│   └── udp_packet_generator.cpp   # Load test generator: produces realistic UDP data streams
+│   ├── evaluate_results.py          # Python analytics engine: generates performance dashboard from timing data
+│   ├── tcp_receiver.cpp             # TCP test server to capture and validate processed outputs
+│   ├── test_all.cpp                 # Comprehensive integration test with latency measurement
+│   └── udp_packet_generator.cpp     # Load test generator: produces realistic UDP data streams
 ├── test_data/
-│   ├── input_packets.bin          # Binary test data stream for system validation
-│   ├── input_packets.csv          # Human-readable representation of test data
-│   └── input_summary.csv          # Test case summary with expected processing behavior
+│   ├── input_packets.bin            # Binary test data stream for system validation
+│   ├── input_packets.csv            # Human-readable representation of test data
+│   └── input_summary.csv            # Test case summary with expected processing behavior
 ├── test_results/
-│   ├── latency_report.html        # Interactive performance dashboard with histograms and statistics
-│   ├── latency_trace.csv          # Microsecond-precision timing data for each processed message
-│   ├── tcp_sent.csv               # Actual output messages transmitted via TCP (validation data)
-│   └── test_all.log               # Complete test execution log with performance metrics
-├── tools/
-│   ├── generate_test_vectors.cpp  # Test data generator: creates realistic data patterns for validation
-│   └── udp_generator.cpp          # Alternative UDP injection utility for custom test scenarios
-├── archive/                        # Additional utilities and experimental components
-└── data_processing_engine_README.md # This file - comprehensive project documentation
+│   ├── latency_report.html          # Interactive performance dashboard with histograms and statistics
+│   ├── latency_trace.csv            # Microsecond-precision timing data for each processed message
+│   ├── tcp_sent.csv                 # Actual output messages transmitted via TCP (validation data)
+│   └── test_all.log                 # Complete test execution log with performance metrics
+└── tools/
+    ├── generate_test_vectors.cpp    # Test data generator: creates realistic data patterns for validation
+    └── udp_generator.cpp            # Alternative UDP injection utility for custom test scenarios
 ```
+
+**Note**: The `build/` and `logs/` directories are generated during compilation and testing. They are excluded from the repository via `.gitignore` to prevent exposing local system paths.
 
 ---
 
