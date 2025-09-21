@@ -2,6 +2,8 @@
 
 This project implements a **low-latency UDP-to-TCP data processing engine** designed for real-time streaming data applications. The service consumes UDP multicast data streams, maintains multi-level data books per subject, calculates composite scores using configurable algorithms, and forwards processed results via TCP. Network byte order is adopted system-wide for optimal performance.
 
+**Note**: This repository includes both a single-threaded implementation (main directory) and a **multithreaded version** for enhanced performance scenarios. The multithreaded implementation can be found in the `multithread/` directory with its own comprehensive documentation.
+
 ---
 
 ## Key Components
@@ -52,6 +54,7 @@ ultra-stream/
 │   ├── tcp_sender.hpp               # TcpSender class for reliable result transmission
 │   ├── types.hpp                    # Shared type definitions: DataLevel, ProcessedMessage, CompositeScoreMessage
 │   └── udp_receiver.hpp             # UdpReceiver for high-efficiency multicast data ingestion
+├── multithread/                     # Multithreaded implementation with enhanced performance (see multithread/README.md)
 ├── src/
 │   ├── composite_score_calculator.cpp # Implementation of configurable scoring algorithms
 │   ├── data_book.cpp                # Implements DataBook update logic and demand/supply state management

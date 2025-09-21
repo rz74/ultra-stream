@@ -1,0 +1,68 @@
+==========================================================
+  Multithreaded Data Processing Engine - Test Suite
+==========================================================
+Testing multithreaded distribution package...
+
+
+Test 1: Package Integrity Verification
+----------------------------------------
+[0;32m[PASS][0m Distribution file found: multithreaded_data_processing_engine_linux.tar.gz
+[0;32m[PASS][0m SHA256 checksum verification passed
+
+Test 2: Package Extraction
+----------------------------------------
+[0;34m[INFO][0m Cleaning up test environment...
+[0;32m[PASS][0m Package extracted successfully
+[0;32m[PASS][0m Distribution directory created: multithreaded_data_processing_engine_linux
+
+Test 3: File Completeness Check
+----------------------------------------
+[0;32m[PASS][0m Required file present: DataProcessingService
+[0;32m[PASS][0m Required file present: README.md
+[0;32m[PASS][0m Required file present: install.sh
+[0;32m[PASS][0m Required file present: test_service.sh
+[0;32m[PASS][0m Required file present: BUILD_INFO.txt
+[0;32m[PASS][0m Required file present: CMakeLists.txt
+[0;32m[PASS][0m Required file present: DataProcessingService.cpp
+[0;32m[PASS][0m All required files present
+
+Test 4: Executable Permissions and Dependencies
+----------------------------------------
+[0;32m[PASS][0m DataProcessingService is executable
+[0;34m[INFO][0m Checking dynamic dependencies...
+[0;34m[INFO][0m Dynamic dependencies found: 3
+	linux-vdso.so.1 (0x00007fff937f7000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000070cf52a00000)
+	/lib64/ld-linux-x86-64.so.2 (0x000070cf52e93000)
+
+Test 5: Installation Script Execution
+----------------------------------------
+[0;32m[PASS][0m Installation script executed successfully
+
+Test 6: Basic Service Startup and Shutdown
+----------------------------------------
+[0;34m[INFO][0m Starting DataProcessingService on port 12345...
+[0;32m[PASS][0m Service started successfully (PID: 8994)
+[0;32m[PASS][0m Service running stably
+[0;32m[PASS][0m Service shutdown completed
+
+Test 7: Multi-threading and Performance Validation
+----------------------------------------
+[0;34m[INFO][0m System has 8 CPU cores
+[0;34m[INFO][0m Testing multithreaded performance...
+[0;32m[PASS][0m Service appears to be using multithreading
+[0;34m[INFO][0m Sending concurrent test data streams...
+[0;32m[PASS][0m Concurrent data processing test completed
+
+Test 8: Data Processing and Output Validation
+----------------------------------------
+[0;34m[INFO][0m Testing data processing with sample packets...
+[0;32m[PASS][0m Data processing test completed
+[0;32m[PASS][0m Output file generated successfully
+[0;32m[PASS][0m Output file has correct header format
+[0;34m[INFO][0m Output file created but no data processed (expected for demo)
+
+Test 9: Performance and Resource Monitoring
+----------------------------------------
+[0;34m[INFO][0m Testing performance characteristics...
+[0;34m[INFO][0m System has 8 CPU cores
